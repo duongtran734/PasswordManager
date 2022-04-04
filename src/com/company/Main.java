@@ -8,11 +8,12 @@ import com.formdev.flatlaf.ui.*;
 
 import java.awt.*;
 import javax.swing.*;
+// TODO make panel class for each panel and start with menu item onward
 
 public class Main extends JFrame {
     private JButton btn;
     private JPanel panel;
-    private JPanel menuPanel;
+    private MenuPanel menuPanel;
     private JPanel contentPanel;
 
 
@@ -27,13 +28,12 @@ public class Main extends JFrame {
 
     private void initComponents(){
         panel = new JPanel();
-        menuPanel = new JPanel();
+        menuPanel = new MenuPanel();
         contentPanel = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
 
         // Entire window panel
         panel.setLayout(new GridBagLayout());
-        panel.setBackground(Color.BLACK);
 
         //menu panel
         c.fill = GridBagConstraints.BOTH;
@@ -54,11 +54,12 @@ public class Main extends JFrame {
         contentPanel.setBackground(new Color(255,255,255));
         panel.add(contentPanel,c);
 
-        Image img = Toolkit.getDefaultToolkit().getImage("src/Icons/favicon-16x16.png");
+        Image img = Toolkit.getDefaultToolkit().getImage("src/com/company/Icons/favicon-16x16.png");
         this.setTitle("Password Manager");
         this.setIconImage(img);
         this.add(panel);
-        this.setPreferredSize(new Dimension( 1660, 880 ));
+        this.setMinimumSize(new Dimension( 1180, 600));
+        this.setPreferredSize(new Dimension( 1180, 600));
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -66,7 +67,7 @@ public class Main extends JFrame {
 
 
     public static void main(String[] args){
-//        FlatLightLaf.setup();
+        FlatLightLaf.setup();
         try {
             UIManager.setLookAndFeel( new FlatDarkLaf() );
         } catch( Exception ex ) {
