@@ -8,7 +8,6 @@ import com.formdev.flatlaf.ui.*;
 
 import java.awt.*;
 import javax.swing.*;
-// TODO make panel class for each panel and start with menu item onward
 
 public class Main extends JFrame {
     private JButton btn;
@@ -28,12 +27,22 @@ public class Main extends JFrame {
 
     private void initComponents(){
         panel = new JPanel();
-        menuPanel = new MenuPanel();
-        contentPanel = new JPanel();
+        contentPanel = new JPanel(new BorderLayout());
+        menuPanel = new MenuPanel(this);
         GridBagConstraints c = new GridBagConstraints();
 
         // Entire window panel
         panel.setLayout(new GridBagLayout());
+
+        //content panel
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.weighty=1;
+        c.weightx = 1;
+        contentPanel.setBackground(new Color(255,255,255));
+        panel.add(contentPanel,c);
 
         //menu panel
         c.fill = GridBagConstraints.BOTH;
@@ -44,15 +53,7 @@ public class Main extends JFrame {
         panel.add(menuPanel,c);
 
 
-        //menu panel
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.weighty=1;
-        c.weightx = 1;
-        contentPanel.setBackground(new Color(255,255,255));
-        panel.add(contentPanel,c);
+
 
         Image img = Toolkit.getDefaultToolkit().getImage("src/com/company/Icons/favicon-16x16.png");
         this.setTitle("Password Manager");
@@ -63,6 +64,13 @@ public class Main extends JFrame {
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+    }
+
+    public void showForm(Component com){
+        contentPanel.removeAll();
+        contentPanel.add(com);
+        contentPanel.repaint();
+        contentPanel.revalidate();
     }
 
 
