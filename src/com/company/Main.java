@@ -68,7 +68,14 @@ public class Main extends JFrame {
 
     public void showForm(Component com){
         contentPanel.removeAll();
-        contentPanel.add(com);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.weighty=1;
+        c.weightx = 1;
+        contentPanel.setBackground(new Color(255,255,255));
+        contentPanel.add(com,c);
         contentPanel.repaint();
         contentPanel.revalidate();
     }

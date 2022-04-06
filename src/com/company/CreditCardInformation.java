@@ -8,21 +8,22 @@ public class CreditCardInformation {
     private int cardNumber;
     private int cardPIN;
     private int cardCVV;
-    private Date exprDate;
+    private String exprDate;
+    private String cardZip;
 
     public CreditCardInformation(){
         super();
     }
 
-    public CreditCardInformation(String title, String cardName, int cardNumber, int cardPIN, int cardCVV, Date exprDate) {
+    public CreditCardInformation(String title, String cardName, int cardNumber, int cardPIN, int cardCVV, String exprDate, String cardZip) {
         this.title = title;
         this.cardName = cardName;
         this.cardNumber = cardNumber;
         this.cardPIN = cardPIN;
         this.cardCVV = cardCVV;
         this.exprDate = exprDate;
+        this.cardZip = cardZip;
     }
-
 
     public String getTitle() {
         return title;
@@ -64,13 +65,22 @@ public class CreditCardInformation {
         this.cardCVV = cardCVV;
     }
 
-    public Date getExprDate() {
+    public String getExprDate() {
         return exprDate;
     }
 
-    public void setExprDate(Date exprDate) {
+    public void setExprDate(String exprDate) {
         this.exprDate = exprDate;
     }
+
+    public String getCardZip() {
+        return cardZip;
+    }
+
+    public void setCardZip(String cardZip) {
+        this.cardZip = cardZip;
+    }
+
 
     @Override
     public String toString() {
@@ -80,7 +90,8 @@ public class CreditCardInformation {
                 ", cardNumber=" + cardNumber +
                 ", cardPIN=" + cardPIN +
                 ", cardCVV=" + cardCVV +
-                ", exprDate=" + exprDate +
+                ", exprDate='" + exprDate + '\'' +
+                ", cardZip='" + cardZip + '\'' +
                 '}';
     }
 }

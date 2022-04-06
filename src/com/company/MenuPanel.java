@@ -8,6 +8,12 @@ import com.company.FormPanels.TrashPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuPanel extends JPanel {
@@ -66,16 +72,29 @@ public class MenuPanel extends JPanel {
         menuList.getSelectionModel().addListSelectionListener(e->{
             MenuModel item = menuList.getSelectedValue();
             if(item.getName().equalsIgnoreCase("all items")){
-                main.showForm(new AllItemsPanel());
+                if(JDBC.queryLoginFromDB().size() + JDBC.queryCreditCardFromDB().size() >0){
+                    main.showForm(new AllItemsTable());
+                }else{
+                    main.showForm(new AllItemsPanel());
+                }
             }else if(item.getName().equalsIgnoreCase("passwords")){
-                main.showForm(new PasswordPanel());
+                if(JDBC.queryLoginFromDB().size() > 0){
+                    main.showForm(new PasswordTable());
+                }else {
+                    main.showForm(new PasswordPanel(main));
+                }
             }else if(item.getName().equalsIgnoreCase("credit cards")){
-                main.showForm(new CreditCardPanel());
+                if(JDBC.queryCreditCardFromDB().size() > 0){
+
+                    main.showForm(new CreditCardTable());
+                }else{
+                    main.showForm(new CreditCardPanel(main));
+                }
+
             }else if(item.getName().equalsIgnoreCase("trash")){
                 main.showForm(new TrashPanel());
             }
         });
-
 
         //======================================Menu Panel================================
         this.setBackground(new Color(55,60,67,255));
@@ -83,6 +102,7 @@ public class MenuPanel extends JPanel {
 
 
     }
+
 
 
 

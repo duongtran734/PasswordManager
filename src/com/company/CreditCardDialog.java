@@ -258,18 +258,23 @@ public class CreditCardDialog extends JDialog {
 
     private void okBtn_response(JDialogCreditCardResponse response){
         //Get the fields and assign it to the obj to return
-//        PasswordInformation pw = new PasswordInformation();
-//        pw.setTitle(titleField.getText());
-//        pw.setUsername(username.getText());
-//        pw.setPassword(String.valueOf(password.getPassword()));
-//
-//        response.getResponse(pw);
+        CreditCardInformation card = new CreditCardInformation();
+        card.setTitle(titleField.getText());
+        card.setCardName(cardHolder.getText());
+        card.setCardNumber(Integer.parseInt(cardNumber.getText()));
+        card.setExprDate(cardExpDate.getText());
+        card.setCardCVV(Integer.parseInt(String.valueOf(cardCVV.getPassword())));
+        card.setCardPIN(Integer.parseInt(String.valueOf(cardPIN.getPassword())));
+        card.setCardZip(cardZipCode.getText());
+
+        response.getResponse(card);
     }
+
+    // MM/yy format validation
     private  boolean validateExpireFormat(String expiryDate) {
         return expiryDate.matches("(?:0[1-9]|1[0-2])/[0-9]{2}");
     }
 }
-
 //TODO Make this more robust instead of using 3 different methods
 
 // 3 Digits

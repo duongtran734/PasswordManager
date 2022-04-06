@@ -1,11 +1,11 @@
 package com.company.FormPanels;
 
-import com.company.CreditCardDialog;
-import com.company.CreditCardInformation;
+import com.company.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.sql.SQLException;
 
 
 public class CreditCardPanel extends JPanel  {
@@ -15,8 +15,10 @@ public class CreditCardPanel extends JPanel  {
     private JLabel icon2Label;
     private JLabel icon3Label;
     private JButton addBtn;
+    private Main main;
 
-    public CreditCardPanel() {
+    public CreditCardPanel(Main main) {
+        this.main = main;
         initComponents();
     }
 
@@ -77,9 +79,6 @@ public class CreditCardPanel extends JPanel  {
             CreditCardDialog cd = new CreditCardDialog(new JDialogCreditCardResponseImpl());
             cd.pack();
             cd.setVisible(true);
-//            PasswordDialog pd = new PasswordDialog(new JDialogPasswordResponseImpl());
-//            pd.pack();
-//            pd.setVisible(true);
 //            System.out.println(students.size());
         });
     }
@@ -89,13 +88,14 @@ public class CreditCardPanel extends JPanel  {
         @Override
         public void getResponse(CreditCardInformation creditCard) {
             System.out.println(creditCard.toString());
+            try {
+                JDBC.insertToCreditCard(creditCard);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            main.showForm(new CreditCardTable());
         }
     }
-
-
-
-
-
 
 
 }
