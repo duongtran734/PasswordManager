@@ -1,4 +1,4 @@
-package com.company;
+package com.company.FormPanels;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -34,6 +34,7 @@ public class AllItemsPanel extends JPanel {
         icons.add(icon1Label);
         icons.add(icon2Label);
         icons.add(icon3Label);
+        icons.setMinimumSize(new Dimension(1000, 500));// to have consistence size in layout
         icons.setBackground(new Color(255,255,255));
         c.gridx = 0;
         c.gridy = 0;

@@ -1,4 +1,7 @@
-package com.company;
+package com.company.FormPanels;
+
+import com.company.PasswordDialog;
+import com.company.PasswordInformation;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -7,9 +10,10 @@ import java.awt.*;
 public class PasswordPanel extends JPanel {
     private JLabel title;
     private JPanel icons;
-    JLabel icon1Label;
-    JLabel icon2Label;
-    JLabel icon3Label;
+    private JLabel icon1Label;
+    private JLabel icon2Label;
+    private JLabel icon3Label;
+    private JButton addBtn;
     public PasswordPanel(){
         initComponents();
     }
@@ -21,6 +25,7 @@ public class PasswordPanel extends JPanel {
         icon1Label = new JLabel();
         icon2Label = new JLabel();
         icon3Label = new JLabel();
+        addBtn = new JButton();
         GridBagConstraints c = new GridBagConstraints();
 
         //================Icons panel==================================================
@@ -33,6 +38,7 @@ public class PasswordPanel extends JPanel {
         icons.add(icon1Label);
         icons.add(icon2Label);
         icons.add(icon3Label);
+        icons.setMinimumSize(new Dimension(1000, 500));// to have consistence size in layout
         icons.setBackground(new Color(255,255,255));
         c.gridx = 0;
         c.gridy = 0;
@@ -42,6 +48,7 @@ public class PasswordPanel extends JPanel {
 
         //=================Message====================================================
         title.setForeground(Color.BLACK);
+        title.setBorder(new EmptyBorder(0,0,20,0));//top,left,bottom,right
         Font font = new Font("Arial", Font.BOLD,22);
         title.setFont(font);
         title.setText("No passwords found");
@@ -50,5 +57,36 @@ public class PasswordPanel extends JPanel {
         c.gridy = 1;
         this.add(title,c);
         this.setBackground(new Color(255,255,255));
+
+
+        //======================Add Button============================
+        font = new Font("Arial", Font.BOLD,18);
+        addBtn.setFont(font);
+        addBtn.setForeground(Color.WHITE);
+        addBtn.setText("Add Password");
+        addBtn.putClientProperty("JButton.buttonType", "roundRect");
+        addBtn.setBackground(Color.BLACK);
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 2;
+        this.add(addBtn,c);
+
+        addBtn.addActionListener(e -> {
+            // Get Password Dialog
+            PasswordDialog pd = new PasswordDialog(new JDialogPasswordResponseImpl());
+            pd.pack(); // to resize
+            pd.setVisible(true);
+        });
+
+    }
+
+
+    private class JDialogPasswordResponseImpl implements PasswordDialog.JDialogPasswordResponse {
+
+        @Override
+        public void getResponse(PasswordInformation pw)
+        {
+            System.out.println(pw.toString());
+        }
     }
 }

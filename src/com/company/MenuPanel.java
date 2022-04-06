@@ -1,9 +1,13 @@
 package com.company;
 
+import com.company.FormPanels.AllItemsPanel;
+import com.company.FormPanels.CreditCardPanel;
+import com.company.FormPanels.PasswordPanel;
+import com.company.FormPanels.TrashPanel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 
 public class MenuPanel extends JPanel {

@@ -27,7 +27,7 @@ public class Main extends JFrame {
 
     private void initComponents(){
         panel = new JPanel();
-        contentPanel = new JPanel(new BorderLayout());
+        contentPanel = new JPanel(new GridBagLayout());
         menuPanel = new MenuPanel(this);
         GridBagConstraints c = new GridBagConstraints();
 
@@ -48,7 +48,7 @@ public class Main extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = 0.2;
+        c.weightx = 0.1;
         c.weighty=1;
         panel.add(menuPanel,c);
 
